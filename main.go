@@ -112,6 +112,21 @@ func addTestQuotes(count int) {
 	}
 }
 
+func garbageWorker() {
+	ti := 1 * time.Hour
+	tl := time.Now().Add(-ti).Unix()
+	removed := 0
+	for i := 0; i < len(Quotes); i++ {
+		if Quotes[i].Created_at < tl {
+			Quotes = append(Quotes[:i], Quotes[i+1:]...)
+			removed++
+			i--
+		}
+	}
+	time.Sleep(ti)
+	go garbageWorker()
+}
+
 func handleRequests() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", allQuotes)
@@ -127,5 +142,6 @@ func handleRequests() {
 func main() {
 	addTestQuotes(5)
 
+	go garbageWorker()
 	handleRequests()
 }
