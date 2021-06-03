@@ -48,7 +48,7 @@ GET http://localhost:10000/random-quote
 ```
 
 ## GarbageWorker
-Create a worker that wakes up every 5 minutes and deletes quotes that were created more than 1 hour ago.
+Added a worker that wakes up every 5 minutes and deletes quotes that were created more than 1 hour ago.
 ## TODO
 1. Add tests
 2. Dockerize
