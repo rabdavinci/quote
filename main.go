@@ -114,6 +114,7 @@ func addTestQuotes(count int) {
 
 func garbageWorker() {
 	ti := 1 * time.Hour
+	ts := 5 * time.Minute
 	tl := time.Now().Add(-ti).Unix()
 	removed := 0
 	for i := 0; i < len(Quotes); i++ {
@@ -123,7 +124,7 @@ func garbageWorker() {
 			i--
 		}
 	}
-	time.Sleep(ti)
+	time.Sleep(ts)
 	go garbageWorker()
 }
 
