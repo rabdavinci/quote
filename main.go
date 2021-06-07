@@ -19,7 +19,15 @@ func getAllQuotes(w http.ResponseWriter, r *http.Request) {
 
 func getQuoteById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
+	id, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		panic(err)
+	}
+
+	if id == 0 {
+		panic("Id required")
+	}
 
 	i := qs.FindIndexById(id)
 
@@ -45,7 +53,14 @@ func createQuote(w http.ResponseWriter, r *http.Request) {
 
 func updateQuote(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		panic(err)
+	}
+
+	if id == 0 {
+		panic("Id required")
+	}
 	reqBody, _ := ioutil.ReadAll(r.Body)
 	i := qs.FindIndexById(id)
 	json.NewEncoder(w).Encode(qs.Update(reqBody, i))
@@ -53,7 +68,14 @@ func updateQuote(w http.ResponseWriter, r *http.Request) {
 
 func deleteQuote(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		panic(err)
+	}
+
+	if id == 0 {
+		panic("Id required")
+	}
 	i := qs.FindIndexById(id)
 	qs.DeleteByIndex(i)
 }
