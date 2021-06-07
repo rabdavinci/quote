@@ -14,11 +14,11 @@ import (
 )
 
 type Quote struct {
-	Id         int    `json:"Id"`
-	Author     string `json:"Author"`
-	Quote      string `json:"Quote"`
-	Category   string `json:"Category"`
-	Created_at int64  `json:"Created_at"`
+	Id        int    `json:"id"`
+	Author    string `json:"author"`
+	Quote     string `json:"quote"`
+	Category  string `json:"category"`
+	CreatedAt int64  `json:"created_at"`
 }
 
 var Quotes []Quote
@@ -107,7 +107,7 @@ func addTestQuotes(count int) {
 		quote.Author = fmt.Sprintf("Author %d", i)
 		quote.Quote = fmt.Sprintf("Quote %d", i)
 		quote.Category = fmt.Sprintf("Category %d", i)
-		quote.Created_at = time.Now().Unix()
+		quote.CreatedAt = time.Now().Unix()
 		Quotes = append(Quotes, quote)
 	}
 }
@@ -118,7 +118,7 @@ func garbageWorker() {
 	tl := time.Now().Add(-ti).Unix()
 	removed := 0
 	for i := 0; i < len(Quotes); i++ {
-		if Quotes[i].Created_at < tl {
+		if Quotes[i].CreatedAt < tl {
 			Quotes = append(Quotes[:i], Quotes[i+1:]...)
 			removed++
 			i--
