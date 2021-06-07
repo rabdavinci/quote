@@ -11,7 +11,7 @@ git clone git@github.com:rabdavinci/quote.git .
 ```
 3. Run main.go and visit 0.0.0.0:10000/ (for windows "localhost:10000/") on browser
 ```
-$ go run main.go
+$ go run main.go quote.go worker.go
 ```
 4. Use REST API Methods
 
@@ -49,6 +49,12 @@ GET http://localhost:10000/random-quote
 
 ## GarbageWorker
 Added a worker that wakes up every 5 minutes and deletes quotes that were created more than 1 hour ago.
+
+## HOW 2TEST
+```
+go test
+```
+
 ## TODO
-1. Add tests
-2. Dockerize
+1. Use RestAPI design with  http status codes for NotFound, Duplicate, InternalError, etc.,
+2. Add errors handle.
